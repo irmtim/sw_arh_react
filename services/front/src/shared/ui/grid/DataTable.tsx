@@ -29,7 +29,7 @@ const DataTable : FC<Props> = ({dataTableColumns, queryResponse, onRowClick, hov
   
   return (
     <Loading isLoaded={!queryResponse.isLoading}>
-      <div className='table-responsive'>
+      <div className='table-responsive mb-3'>
         <table
           className={clsx('table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer', hover && 'table-hover')}
           {...getTableProps()}

@@ -1,7 +1,8 @@
-import { APP_URL, DataTable, PageLink, PageTitle, QueryRequestProvider, QueryResponseProvider, SearchComponent, useQueryRequest, useQueryResponse } from "shared";
+import { APP_URL, DataTable, PageLink, PageTitle, QueryRequestProvider, QueryResponseProvider, SearchComponent, initialQueryRequest, useQueryRequest, useQueryResponse } from "shared";
 import { dataTableColumns } from "./ui/dataTableColumns";
 import { useParams } from "react-router-dom";
 import { QUERIES, getAll } from "./api/requests";
+import { useEffect } from "react";
 
 
 
@@ -33,19 +34,13 @@ type Props = {
 const Grid = ({ip}: Props) => {
   const request = useQueryRequest()
   const response = useQueryResponse()
-
-  
-
-  // const navigate = useNavigate()
-
-  // const click = (data: ISwitch) => navigate(APP_URL.SWITCHES_VIEW(data.ip)) 
   
   return (
     <>
       <PageTitle
         breadcrumbs={breadcrumbs} 
         toolBarActions={<SearchComponent queryRequest={request} size="sm"/>}>{ip}</PageTitle>
-      <DataTable queryResponse={response} dataTableColumns={dataTableColumns(ip)} hover={true}/>
+      <DataTable queryResponse={response} dataTableColumns={dataTableColumns(ip)}/>
     </>
     
   );
