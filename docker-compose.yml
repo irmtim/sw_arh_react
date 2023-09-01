@@ -1,0 +1,117 @@
+version: '3.9'
+
+services:
+  # db:
+  #   restart: unless-stopped
+  #   container_name: postgres
+  #   image: postgres:latest
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_USER: 'pg'
+  #     POSTGRES_PASSWORD: 'pg'
+  #     POSTGRES_DB: 'SW_DB'
+  #   ports:
+  #     - "5433:5433"
+  #   networks:
+  #     net:
+  #       ipv4_address: 10.5.0.2
+
+  #   healthcheck:
+  #     test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+  #     interval: 10s
+  #     timeout: 10s
+  #     start_period: 30s
+  #     retries: 3
+
+
+  front:
+    restart: unless-stopped
+    build: ./services/front
+
+    expose:
+      - 5001
+
+    ports:
+      - "5001:80"
+
+    networks:
+      net:
+        ipv4_address: 10.5.0.5
+
+    # depends_on:
+    #   back:
+    #     condition: service_healthy
+  
+
+
+  back:
+    restart: unless-stopped
+    build: ./services/back
+    # command: gunicorn --bind 0.0.0.0:5000 app:app
+    volumes:
+      - ./services/back/:/usr/src/app/
+      - ./services/back/data:/usr/src/app/data
+
+    expose:
+      - 5000
+
+    ports:
+      - "5000:80"
+    env_file:
+      - ./.env.dev
+
+    networks:
+      net:
+        ipv4_address: 10.5.0.4
+
+    # depends_on:
+    #   db:
+    #     condition: service_healthy
+
+  nginx:
+    restart: unless-stopped
+    build: ./services/nginx
+    ports:
+      - "1337:80"
+
+    volumes:
+      - ./services/nginx/:/usr/src/app/
+
+    networks:
+      net:
+        ipv4_address: 10.5.0.6
+
+    depends_on:
+      - front
+
+  # pgadmin:
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4:latest
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: "pg@rpz.ru"
+  #     PGADMIN_DEFAULT_PASSWORD: "pg"
+  #   ports:
+  #     - "5050:80"
+  #   restart: unless-stopped
+  #   networks:
+  #     net:
+  #       ipv4_address: 10.5.0.3
+
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+
+volumes:
+  postgres_data:
+
+networks:
+  net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+
+
+
+
