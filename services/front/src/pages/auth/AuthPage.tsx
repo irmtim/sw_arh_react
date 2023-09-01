@@ -24,7 +24,7 @@ const AuthLayout = () => {
           <div className='d-flex align-items-center'>
             <img
               alt='Logo'
-              src={toAbsoluteUrl('/media/logos/logo.png')}
+              src={toAbsoluteUrl('/media/logos/logo1.png')}
               className='h-45px'
             />
             <span className="ms-4 fs-2tx fw-bold text-gray-800">
