@@ -35,9 +35,9 @@ services:
     ports:
       - "5001:80"
 
-    networks:
-      net:
-        ipv4_address: 10.5.0.5
+    # networks:
+    #   net:
+    #     ipv4_address: 10.5.0.5
 
     # depends_on:
     #   back:
@@ -61,9 +61,9 @@ services:
     env_file:
       - ./.env.dev
 
-    networks:
-      net:
-        ipv4_address: 10.5.0.4
+    # networks:
+    #   net:
+    #     ipv4_address: 10.5.0.4
 
     # depends_on:
     #   db:
@@ -78,9 +78,9 @@ services:
     volumes:
       - ./services/nginx/:/usr/src/app/
 
-    networks:
-      net:
-        ipv4_address: 10.5.0.6
+    # networks:
+    #   net:
+    #     ipv4_address: 10.5.0.6
 
     depends_on:
       - front
@@ -102,15 +102,15 @@ services:
   #     db:
   #       condition: service_healthy
 
-volumes:
-  postgres_data:
+# volumes:
+#   postgres_data:
 
-networks:
-  net:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.5.0.0/16
+# networks:
+#   net:
+#     driver: bridge
+#     ipam:
+#       config:
+#         - subnet: 10.5.0.0/16
 
 
 
