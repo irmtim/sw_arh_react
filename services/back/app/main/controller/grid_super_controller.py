@@ -52,19 +52,7 @@ class GridSuperController(Resource):
         result['data'] = data.items
         result['pagination'] = pagination
         
-        # result = Object(
-        #   data = data.items,
-        #   pagination = Object(
-        #     itemsPerPage = items_per_page,
-        #     order = order,
-        #     sort = sort,
-        #     page = page,
-        #     pagesCount = total_count / items_per_page,
-        #     totalCount = total_count
-        #   )
-        # )
-        
-        print(result['pagination'])
+        # print(result['pagination'])
                 
         return result
         

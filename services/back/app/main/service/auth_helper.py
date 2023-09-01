@@ -72,9 +72,6 @@ class Auth:
             
     @staticmethod
     def get_user_info(auth_token):
-        # get the auth token
-        # auth_token = new_request.headers.get('Authorization')
-        # auth_token = session['token']
         if auth_token:
             resp = User.decode_auth_token(auth_token)
             if resp:

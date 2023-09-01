@@ -4,7 +4,6 @@ from flask_bcrypt import Bcrypt
 
 from .config import config_by_name
 from flask.app import Flask
-from flask_session import Session
 from flask_cors import CORS
 
 db = SQLAlchemy()
@@ -17,7 +16,6 @@ def create_app(config_name: str) -> Flask:
         
     db.init_app(app)
     flask_bcrypt.init_app(app)
-    Session(app)
     CORS(app)
 
     return app

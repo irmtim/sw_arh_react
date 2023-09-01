@@ -23,7 +23,6 @@ class SwitchDetails(GridSuperController):
     
     @api.doc('switch details')
     @token_required
-    # @admin_token_required
     @api.marshal_with(_details)
     def post(self, ip):
         query = Switch.query.filter(Switch.ip == ip)

@@ -18,7 +18,6 @@ class SwitchDownload(Resource):
     
     @api.doc('switch download')
     @token_required
-    # @admin_token_required
     @api.marshal_with(_details)
     def post(self, id):
         try:

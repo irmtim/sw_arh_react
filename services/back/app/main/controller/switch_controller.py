@@ -19,7 +19,7 @@ class SwitchList(GridSuperController):
         
         return data
     
-    @api.doc('list_of_registered_users')
+    @api.doc('list_of_grouped_switches')
     @token_required
     @api.marshal_with(_switch)
     def post(self):
